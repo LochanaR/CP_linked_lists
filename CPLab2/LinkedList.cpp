@@ -137,10 +137,21 @@ int main() {
 
 	LinkedList list;
 	int n;
+	int m;
+	float insert_ratio, member_ratio, del_ratio;
 
 	printf("Enter the number of values to be added to the linked list:");
 	scanf_s("%d", &n);
 	printf("You are adding %d values\n", n);
+	printf("Enter the number of operations to be performed on the linked list:");
+	scanf_s("%d", &m);
+	printf("You are gonna do %d operations\n", m);
+	printf("Enter the member ratio");
+	scanf_s("%f", &member_ratio);
+	printf("Enter the insert ratio");
+	scanf_s("%f", &insert_ratio);
+	printf("Enter the delete ratio");
+	scanf_s("%f", &del_ratio);
 
 	/*list.Insert(10, &(list.head));
 	list.Insert(20, &(list.head));
@@ -161,7 +172,7 @@ int main() {
 	}
 
 	int insert = 0, member = 0, del = 0;
-	float insert_ratio = 0.005f, member_ratio = 0.99f, del_ratio = 0.005f;
+	
 
 	while (true) {
 
@@ -173,25 +184,25 @@ int main() {
 		int val = msb | rand();
 		switch (rand() % 3) {
 		case 0:
-			if (insert++ < (int)(insert_ratio*n)) {
+			if (insert++ < (int)(insert_ratio*m)) {
 				list.Insert(val, &(list.head));
 				printf("adding %d\n", val);
 			}
 			break;
 		case 1:
-			if (member++ < (int)(member_ratio*n)) {
+			if (member++ < (int)(member_ratio*m)) {
 				list.Member(val, list.head);
 				printf("searching %d\n", val);
 			}
 			break;
 		case 2:
-			if (del++ < (int)(del_ratio*n)) {
+			if (del++ < (int)(del_ratio*m)) {
 				list.Delete(val, &(list.head));
 				printf("deleting %d\n", val);
 			}
 			break;
 		}
-		if (insert >= (int)(insert_ratio*n) && member >= (int)(member_ratio*n) && del >= (int)(del_ratio*n))
+		if (insert >= (int)(insert_ratio*m) && member >= (int)(member_ratio*m) && del >= (int)(del_ratio*m))
 			break;
 	}
 
