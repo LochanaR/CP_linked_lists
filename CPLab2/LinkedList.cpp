@@ -1,8 +1,9 @@
 //created by Lochana on 17/07/2016
 //This is the serial implementation
+#define PTW32_STATIC_LIB
 #include <stdlib.h>
 #include <stdio.h>
-#include <random>
+#include <pthread.h>  
 
 struct list_node
 {
@@ -131,6 +132,9 @@ public:
 
 int main() {
 
+	unsigned seed = time(NULL);
+	srand(seed);
+
 	LinkedList list;
 	int n;
 
@@ -146,15 +150,12 @@ int main() {
 	printf("%d\n", list.Delete(10, &(list.head)));
 	list.PrintList(list.head);*/
 
-	std::random_device rd;
-	std::default_random_engine eng{ rd() };
-	std::uniform_int_distribution<> dist(0, 65535);
-
-	for (unsigned i = 0; i < n; i++) {
-		list.Insert(dist(eng), &(list.head));
+	for (int i = 0; i < n; i++) {
+		list.Insert(rand(), &(list.head));
 	}
 
 	list.PrintList(list.head);
+	printf("%d",RAND_MAX);
 		
 	
 }
