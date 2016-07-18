@@ -2,8 +2,8 @@
 //This is the serial implementation
 
 #include <stdio.h>
-#include <pthread.h> 
-#include <cstdlib>
+#include <stdlib.h>
+#include <time.h>
 
 struct list_node
 {
@@ -146,40 +146,27 @@ int main() {
 	printf("Enter the number of operations to be performed on the linked list:");
 	scanf_s("%d", &m);
 	printf("You are gonna do %d operations\n", m);
-	printf("Enter the member ratio");
+	printf("Enter the member ratio:\n");
 	scanf_s("%f", &member_ratio);
-	printf("Enter the insert ratio");
+	printf("Enter the insert ratio:\n");
 	scanf_s("%f", &insert_ratio);
-	printf("Enter the delete ratio");
+	printf("Enter the delete ratio:\n");
 	scanf_s("%f", &del_ratio);
 
-	/*list.Insert(10, &(list.head));
-	list.Insert(20, &(list.head));
-	list.Insert(30, &(list.head));
-	list.PrintList(list.head);
-	printf("%d\n", list.Member(10, list.head));
-	printf("%d\n", list.Delete(10, &(list.head)));
-	list.PrintList(list.head);*/
-
+	//Populate the list with n random numbers 
 	for (int i = 0; i < n; i++) {
-
-		//Since the RAND_MAX is normally 32767
-		//this calculation of generating two random numbers
-		//where the first one (msb) will set the ost Significant Bit 
-		//of the second ( msb | rand() ).
+		//We need the numbers to be generated to be between 0 and 65535
+		//Since the RAND_MAX is normally 32767 the below calculation of generates two random numbers
+		//where the first one (msb) will set the Most Significant Bit of the second ( msb | rand() )
+		//finally generating a random number between 0 and 65535 
 		int msb = (rand() % 2) << 15;
 		list.Insert(msb | rand(), &(list.head));
 	}
 
 	int insert = 0, member = 0, del = 0;
 	
-
 	while (true) {
 
-		//Since the RAND_MAX is normally 32767
-		//this calculation of generating two random numbers
-		//where the first one (msb) will set the ost Significant Bit 
-		//of the second ( msb | rand() ).
 		int msb = (rand() % 2) << 15;
 		int val = msb | rand();
 		switch (rand() % 3) {
