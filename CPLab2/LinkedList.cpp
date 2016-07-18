@@ -1,6 +1,8 @@
 //created by Lochana on 17/07/2016
+//This is the serial implementation
 #include <stdlib.h>
 #include <stdio.h>
+#include <random>
 
 struct list_node
 {
@@ -130,13 +132,29 @@ public:
 int main() {
 
 	LinkedList list;
+	int n;
 
-	list.Insert(10, &(list.head));
+	printf("Enter the number of values to be added to the linked list:");
+	scanf_s("%d", &n);
+	printf("You are adding %d values\n", n);
+
+	/*list.Insert(10, &(list.head));
 	list.Insert(20, &(list.head));
 	list.Insert(30, &(list.head));
 	list.PrintList(list.head);
 	printf("%d\n", list.Member(10, list.head));
 	printf("%d\n", list.Delete(10, &(list.head)));
+	list.PrintList(list.head);*/
+
+	std::random_device rd;
+	std::default_random_engine eng{ rd() };
+	std::uniform_int_distribution<> dist(0, 65535);
+
+	for (unsigned i = 0; i < n; i++) {
+		list.Insert(dist(eng), &(list.head));
+	}
+
 	list.PrintList(list.head);
+		
 	
 }
