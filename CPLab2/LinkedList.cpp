@@ -160,6 +160,41 @@ int main() {
 		list.Insert(msb | rand(), &(list.head));
 	}
 
+	int insert = 0, member = 0, del = 0;
+	float insert_ratio = 0.005f, member_ratio = 0.99f, del_ratio = 0.005f;
+
+	while (true) {
+
+		//Since the RAND_MAX is normally 32767
+		//this calculation of generating two random numbers
+		//where the first one (msb) will set the ost Significant Bit 
+		//of the second ( msb | rand() ).
+		int msb = (rand() % 2) << 15;
+		int val = msb | rand();
+		switch (rand() % 3) {
+		case 0:
+			if (insert++ < (int)(insert_ratio*n)) {
+				list.Insert(val, &(list.head));
+				printf("adding %d\n", val);
+			}
+			break;
+		case 1:
+			if (member++ < (int)(member_ratio*n)) {
+				list.Member(val, list.head);
+				printf("searching %d\n", val);
+			}
+			break;
+		case 2:
+			if (del++ < (int)(del_ratio*n)) {
+				list.Delete(val, &(list.head));
+				printf("deleting %d\n", val);
+			}
+			break;
+		}
+		if (insert >= (int)(insert_ratio*n) && member >= (int)(member_ratio*n) && del >= (int)(del_ratio*n))
+			break;
+	}
+
 	list.PrintList(list.head);
 
 		
