@@ -1,9 +1,9 @@
 //created by Lochana on 17/07/2016
 //This is the serial implementation
-#define PTW32_STATIC_LIB
-#include <stdlib.h>
+
 #include <stdio.h>
-#include <pthread.h>  
+#include <pthread.h> 
+#include <cstdlib>
 
 struct list_node
 {
@@ -151,11 +151,17 @@ int main() {
 	list.PrintList(list.head);*/
 
 	for (int i = 0; i < n; i++) {
-		list.Insert(rand(), &(list.head));
+
+		//Since the RAND_MAX is normally 32767
+		//this calculation of generating two random numbers
+		//where the first one (msb) will set the ost Significant Bit 
+		//of the second ( msb | rand() ).
+		int msb = (rand() % 2) << 15;
+		list.Insert(msb | rand(), &(list.head));
 	}
 
 	list.PrintList(list.head);
-	printf("%d",RAND_MAX);
+
 		
 	
 }
