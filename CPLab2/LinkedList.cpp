@@ -174,20 +174,23 @@ int main() {
 		int val = msb | rand();
 		switch (rand() % 3) {
 		case 0:
-			if (insert++ < (int)(insert_ratio*m)) {
+			if (insert < (int)(insert_ratio*m)) {
 				list.Insert(val, &(list.head));
+				insert++;
 				printf("adding %d\n", val);
 			}
 			break;
 		case 1:
-			if (member++ < (int)(member_ratio*m)) {
+			if (member < (int)(member_ratio*m)) {
 				list.Member(val, list.head);
+				member++;
 				printf("searching %d\n", val);
 			}
 			break;
 		case 2:
-			if (del++ < (int)(del_ratio*m)) {
+			if (del < (int)(del_ratio*m)) {
 				list.Delete(val, &(list.head));
+				del++;
 				printf("deleting %d\n", val);
 			}
 			break;
