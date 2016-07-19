@@ -139,6 +139,8 @@ int main() {
 	int n;
 	int m;
 	float insert_ratio, member_ratio, del_ratio;
+	int insert = 0, member = 0, del = 0;
+	double start, finish, elapsed;
 
 	printf("Enter the number of values to be added to the linked list:");
 	scanf_s("%d", &n);
@@ -163,8 +165,9 @@ int main() {
 		list.Insert(msb | rand(), &(list.head));
 	}
 
-	int insert = 0, member = 0, del = 0;
 	
+
+	start = clock();
 	while (true) {
 
 		int msb = (rand() % 2) << 15;
@@ -193,7 +196,17 @@ int main() {
 			break;
 	}
 
-	list.PrintList(list.head);
+	finish = clock();
+	elapsed = (finish - start) / CLOCKS_PER_SEC;
+
+	printf("Elapsed time = %.10f seconds\n", elapsed);
+
+	
+	printf("Member operation count = %d\n",member);
+	printf("Insert operation count = %d\n",insert);
+	printf("Delete operation count = %d\n",del);
+
+	//list.PrintList(list.head);
 
 		
 	
